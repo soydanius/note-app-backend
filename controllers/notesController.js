@@ -3,10 +3,7 @@ import Note from "../models/Note.js";
 
 export const getAllNotes = async (req, res) => {
   try {
-    const allNotes = await Note.find();
-    if (!allNotes.length) {
-      throw new Error("No notes found.");
-    }
+    const allNotes = await Note.find().sort({ createdAt: "desc" });
     res.status(200).json(allNotes);
   } catch (error) {
     console.log(error);
@@ -29,6 +26,7 @@ export const updateNote = async (req, res) => {
   try {
     const { header, content } = req.body;
     const id = req.params.id;
+
     if (!mongoose.Types.ObjectId.isValid(id)) {
       throw new Error("Not valid id.");
     }

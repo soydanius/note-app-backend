@@ -9,6 +9,7 @@ const NoteSchema = new mongoose.Schema({
     type: String,
     trim: true,
   },
+  createdAt: { type: Date, default: Date.now },
 });
 
 export default mongoose.model("Note", NoteSchema);
